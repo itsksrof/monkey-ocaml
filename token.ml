@@ -1,4 +1,4 @@
-type token = {
+(*type token = {
   kind: string;
   literal: string
 }
@@ -17,4 +17,6 @@ type tokens =
   | LeftBrace
   | RightBrace
   | Function
-  | Let;; 
+  | Let;;*)
+  
+let hello () = print_endline "Hello"
