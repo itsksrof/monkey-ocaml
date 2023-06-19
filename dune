@@ -1,0 +1,1 @@
+(executable (name lexer_test))
