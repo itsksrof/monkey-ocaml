@@ -16,5 +16,9 @@ let read_char (l: lexer) =
   l.position <- l.read_pos;
   l.read_pos <- l.read_pos + 1;;
 
-let new_lexer (input: string) = 
-  read_char { input = input; position = 0; read_pos = 0; ch = '\x00' };;
+let new_lexer (input: string) : lexer =
+  let l =
+    {input = input; position = 0; read_pos = 0; ch = '\x00'}
+  in
+    read_char(l);
+    l;;
