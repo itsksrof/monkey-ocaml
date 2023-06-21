@@ -11,10 +11,10 @@ let read_char (l: lexer) =
       l.ch <- '\x00'
     else
       l.ch <- String.get l.input l.read_pos
-    in read;
-
-  l.position <- l.read_pos;
-  l.read_pos <- l.read_pos + 1;;
+    in 
+      l.position <- l.read_pos;
+      l.read_pos <- l.read_pos + 1;
+      read;; 
 
 let new_lexer (input: string) : lexer =
   let l =
