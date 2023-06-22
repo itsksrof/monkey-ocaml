@@ -23,5 +23,36 @@ let new_lexer (input: string) : lexer =
     read_char(l);
     l;;
 
-let new_token (kind: string) (ch: char) : Token.token =
-  {kind = kind; literal = String.make 1 ch};; 
+let new_token (kind: Token.tokens) (ch: char) : Token.token =
+  {kind = kind; literal = String.make 1 ch};;
+  
+let is_letter (ch: char) : bool =
+  'a' <= ch && ch <= 'z' || 'A' <= ch && ch <= 'Z' || ch == '_';;
+
+let read_identifier (l: lexer) : string =
+  let position = l.position in
+    while is_letter(l.ch) do
+      read_char(l)
+    done;
+    String.sub l.input position l.position;;
+
+let next_token (l: lexer) : Token.token =
+  let match_token =
+    match l.ch with
+    | '=' -> new_token Token.Assign l.ch
+    | '+' -> new_token Token.Plus l.ch
+    | ',' -> new_token Token.Comma l.ch
+    | ';' -> new_token Token.Semicolon l.ch
+    | '(' -> new_token Token.LeftParen l.ch
+    | ')' -> new_token Token.RightParen l.ch
+    | '{' -> new_token Token.LeftBrace l.ch
+    | '}' -> new_token Token.RightBrace l.ch
+    | '\x00' -> new_token Token.Eof l.ch
+    | _ -> 
+      if is_letter(l.ch) then 
+        {kind = Token.Letter; literal = read_identifier(l)}
+      else
+        new_token Token.Illegal l.ch
+  in 
+    read_char(l);
+    match_token;; 
