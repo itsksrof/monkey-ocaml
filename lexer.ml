@@ -22,3 +22,6 @@ let new_lexer (input: string) : lexer =
   in
     read_char(l);
     l;;
+
+let new_token (kind: string) (ch: char) : Token.token =
+  {kind = kind; literal = String.make 1 ch};; 
