@@ -1,13 +1,4 @@
-type token = {
-  kind: string;
-  literal: string;
-}
-
-(*type tokens = 
-  | Illegal
-  | Eof 
-  | Ident 
-  | Int
+type tokens = 
   | Assign
   | Plus
   | Comma
@@ -16,7 +7,13 @@ type token = {
   | RightParen
   | LeftBrace
   | RightBrace
-  | Function
-  | Let;;*)
-  
+  | Eof
+  | Letter
+  | Illegal;;
+
+type token = {
+  kind: tokens;
+  literal: string;
+} 
+
 let hello () = print_endline "Hello"
