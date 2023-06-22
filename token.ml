@@ -1,9 +1,9 @@
-(*type token = {
+type token = {
   kind: string;
-  literal: string
+  literal: string;
 }
 
-type tokens = 
+(*type tokens = 
   | Illegal
   | Eof 
   | Ident 
