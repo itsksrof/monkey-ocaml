@@ -36,7 +36,13 @@ let read_identifier (l: lexer) : string =
     done;
     String.sub l.input position l.position;;
 
+let skip_whitespace (l: lexer) =
+  while l.ch == ' ' || l.ch == '\t' || l.ch == '\n' || l.ch == '\r' do
+    read_char(l)
+  done;;
+
 let next_token (l: lexer) : Token.token =
+  skip_whitespace(l);
   let match_token =
     match l.ch with
     | '=' -> new_token Token.Assign l.ch
