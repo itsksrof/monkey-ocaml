@@ -29,9 +29,19 @@ let new_token (kind: Token.tokens) (ch: char) : Token.token =
 let is_letter (ch: char) : bool =
   'a' <= ch && ch <= 'z' || 'A' <= ch && ch <= 'Z' || ch == '_';;
 
+let is_digit (ch: char) : bool =
+  '0' <= ch && ch <= '9';;
+
 let read_identifier (l: lexer) : string =
   let position = l.position in
     while is_letter(l.ch) do
+      read_char(l)
+    done;
+    String.sub l.input position l.position;;
+
+let read_number (l: lexer) : string =
+  let position = l.position in
+    while is_digit(l.ch) do
       read_char(l)
     done;
     String.sub l.input position l.position;;
@@ -57,7 +67,9 @@ let next_token (l: lexer) : Token.token =
     | _ -> 
       if is_letter(l.ch) then
         let literal = read_identifier(l) in
-          {kind = Token.lookup_identifier(literal); literal = read_identifier(l)} 
+          {kind = Token.lookup_identifier(literal); literal = read_identifier(l)}
+      else if is_digit(l.ch) then
+        {kind = Token.Int; literal = read_number(l)}
       else
         new_token Token.Illegal l.ch
   in 
