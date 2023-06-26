@@ -9,6 +9,7 @@ type tokens =
   | RightBrace
   | Function
   | Let
+  | Int
   | Eof
   | Illegal;;
 
