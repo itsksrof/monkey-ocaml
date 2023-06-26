@@ -10,7 +10,6 @@ type tokens =
   | Function
   | Let
   | Eof
-  | Letter
   | Illegal;;
 
 type token = {
