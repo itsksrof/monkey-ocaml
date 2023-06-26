@@ -49,8 +49,9 @@ let next_token (l: lexer) : Token.token =
     | '}' -> new_token Token.RightBrace l.ch
     | '\x00' -> new_token Token.Eof l.ch
     | _ -> 
-      if is_letter(l.ch) then 
-        {kind = Token.Letter; literal = read_identifier(l)}
+      if is_letter(l.ch) then
+        let literal = read_identifier(l) in
+          {kind = Token.lookup_identifier(literal); literal = read_identifier(l)} 
       else
         new_token Token.Illegal l.ch
   in 
