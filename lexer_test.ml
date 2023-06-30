@@ -70,6 +70,15 @@ let test_lexer_rightbrace =
     if String.compare tok.literal "}" != 0 then
       Printf.eprintf "[failed] test_lexer_rightbrace -> wrong token literal\n";;
 
+let test_lexer_function =
+  let input : string = "fn" in
+  let lexer = Lexer.new_lexer input in
+  let tok = Lexer.next_token lexer in
+    if tok.kind != Token.Function then
+      Printf.eprintf "[failed] test_lexer_function -> wrong token kind\n";
+    if String.compare tok.literal "fn" != 0 then
+      Printf.eprintf "[failed] test_lexer_function -> wrong token literal\n";;
+
 let () =
   test_lexer_assign;
   test_lexer_plus;
@@ -78,4 +87,5 @@ let () =
   test_lexer_leftparen;
   test_lexer_rightparen;
   test_lexer_leftbrace;
-  test_lexer_rightbrace
+  test_lexer_rightbrace;
+  test_lexer_function
