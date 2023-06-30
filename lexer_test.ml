@@ -61,6 +61,15 @@ let test_lexer_leftbrace =
     if String.compare tok.literal "{" != 0 then
       Printf.eprintf "[failed] test_lexer_leftbrace -> wrong token literal\n";;
 
+let test_lexer_rightbrace =
+  let input : string = "}" in
+  let lexer = Lexer.new_lexer input in
+  let tok = Lexer.next_token lexer in
+    if tok.kind != Token.RightBrace then
+      Printf.eprintf "[failed] test_lexer_rightbrace -> wrong token kind\n";
+    if String.compare tok.literal "}" != 0 then
+      Printf.eprintf "[failed] test_lexer_rightbrace -> wrong token literal\n";;
+
 let () =
   test_lexer_assign;
   test_lexer_plus;
@@ -68,4 +77,5 @@ let () =
   test_lexer_semicolon;
   test_lexer_leftparen;
   test_lexer_rightparen;
-  test_lexer_leftbrace
+  test_lexer_leftbrace;
+  test_lexer_rightbrace
