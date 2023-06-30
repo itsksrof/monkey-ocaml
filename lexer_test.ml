@@ -38,7 +38,7 @@ let test_lexer_leftparen =
   let input : string = "(" in
   let lexer = Lexer.new_lexer input in
   let tok = Lexer.next_token lexer in
-    if tok.kind != Token.Semicolon then
+    if tok.kind != Token.LeftParen then
       Printf.eprintf "[failed] test_lexer_leftparen -> wrong token kind\n";
     if String.compare tok.literal "(" != 0 then
       Printf.eprintf "[failed] test_lexer_leftparen -> wrong token literal\n";;
