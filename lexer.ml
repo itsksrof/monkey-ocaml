@@ -8,7 +8,7 @@ type lexer = {
 let read_char (l: lexer) =
   let read =
     if l.read_pos >= String.length l.input then
-      l.ch <- '\x00'
+      l.ch <- char_of_int 0
     else
       l.ch <- String.get l.input l.read_pos
     in 
@@ -18,7 +18,7 @@ let read_char (l: lexer) =
 
 let new_lexer (input: string) : lexer =
   let l =
-    {input = input; position = 0; read_pos = 0; ch = '\x00'}
+    {input = input; position = 0; read_pos = 0; ch = char_of_int 0}
   in
     read_char(l);
     l;;
@@ -31,6 +31,9 @@ let is_letter (ch: char) : bool =
 
 let is_digit (ch: char) : bool =
   '0' <= ch && ch <= '9';;
+
+let is_eof (ch: char) : bool =
+    char_of_int 0 = ch;;
 
 let read_identifier (l: lexer) : string =
   let position = l.position in
@@ -63,13 +66,14 @@ let next_token (l: lexer) : Token.token =
     | ')' -> new_token Token.RightParen l.ch
     | '{' -> new_token Token.LeftBrace l.ch
     | '}' -> new_token Token.RightBrace l.ch
-    | '\x00' -> new_token Token.Eof l.ch
     | _ -> 
       if is_letter(l.ch) then
         let literal = read_identifier(l) in
           {kind = Token.lookup_identifier(literal); literal = literal}
       else if is_digit(l.ch) then
         {kind = Token.Int; literal = read_number(l)}
+      else if is_eof(l.ch) then
+        new_token Token.Eof l.ch
       else
         new_token Token.Illegal l.ch
   in 
