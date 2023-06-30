@@ -16,6 +16,16 @@ let test_lexer_plus =
     if String.compare tok.literal "+" != 0 then
       Printf.eprintf "[failed] test_lexer_plus -> wrong token literal \n";;
 
+let test_lexer_comma =
+  let input : string = "," in
+  let lexer = Lexer.new_lexer input in
+  let tok = Lexer.next_token lexer in
+    if tok.kind != Token.Comma then
+      Printf.eprintf "[failed] test_lexer_comma -> wrong token kind\n";
+    if String.compare tok.literal "," != 0 then
+      Printf.eprintf "[failed] test_lexer_comma -> wrong token literal\n";;
+
 let () =
   test_lexer_assign;
-  test_lexer_plus
+  test_lexer_plus;
+  test_lexer_comma
