@@ -67,7 +67,7 @@ let next_token (l: lexer) : Token.token =
     | _ -> 
       if is_letter(l.ch) then
         let literal = read_identifier(l) in
-          {kind = Token.lookup_identifier(literal); literal = read_identifier(l)}
+          {kind = Token.lookup_identifier(literal); literal = literal}
       else if is_digit(l.ch) then
         {kind = Token.Int; literal = read_number(l)}
       else
