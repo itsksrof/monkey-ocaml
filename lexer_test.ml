@@ -1,4 +1,4 @@
-let test_assign =
+let test_lexer_assign =
   let input : string = "=" in
   let lexer = Lexer.new_lexer input in
   let tok = Lexer.next_token lexer in 
@@ -8,4 +8,4 @@ let test_assign =
       Printf.eprintf "[failed] test_assign -> wrong token literal\n";;
 
 let () =
-  test_assign
+  test_lexer_assign
