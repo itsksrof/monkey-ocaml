@@ -97,6 +97,13 @@ let test_lexer_int =
     if String.compare tok.literal "8" != 0 then
       Printf.eprintf "[failed] test_lexer_int -> wrong token literal\n";;
 
+let test_lexer_eof =
+  let input : string = "" in
+  let lexer = Lexer.new_lexer input in
+  let tok = Lexer.next_token lexer in
+    if tok.kind != Token.Eof then
+      Printf.eprintf "[failed] test_lexer_eof -> wrong token kind\n";;
+
 let () =
   test_lexer_assign;
   test_lexer_plus;
@@ -108,4 +115,5 @@ let () =
   test_lexer_rightbrace;
   test_lexer_function;
   test_lexer_let;
-  test_lexer_int
+  test_lexer_int;
+  test_lexer_eof
