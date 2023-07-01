@@ -23,5 +23,3 @@ let keywords =
 
 let lookup_identifier (identifier: string) : tokens =
   List.assoc identifier keywords;;
-
-let hello () = print_endline "Hello"
