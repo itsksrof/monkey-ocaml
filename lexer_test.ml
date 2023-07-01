@@ -113,6 +113,22 @@ let test_lexer_illegal =
     if String.compare tok.literal "$" != 0 then
       Printf.eprintf "[failed] test_lexer_illegal -> wrong token literal\n";;
 
+let test_next_token =
+  let input : string = "
+  let five = 5;
+  let ten = 10;
+  
+  let add = fn(x, y) {
+    x + y;
+  };
+
+  let result = add(five, ten);
+  !-/*5;
+  5 < 10 > 5;
+  " in
+  let lexer = Lexer.new_lexer input in
+  let tok = Lexer.next_token lexer in
+
 let () =
   test_lexer_assign;
   test_lexer_plus;
