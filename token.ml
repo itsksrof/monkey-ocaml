@@ -9,6 +9,7 @@ type tokens =
   | RightBrace
   | Function
   | Let
+  | Identifier
   | Int
   | Eof
   | Illegal;;
@@ -22,4 +23,4 @@ let keywords =
   ["fn", Function; "let", Let];;
 
 let lookup_identifier (identifier: string) : tokens =
-  List.assoc identifier keywords;;
+  try List.assoc identifier keywords with Not_found -> Identifier;;
