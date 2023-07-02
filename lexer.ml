@@ -9,7 +9,7 @@ let read_char (l: lexer) =
   if l.read_pos >= String.length l.input then
     l.ch <- char_of_int 0
   else
-    l.ch <- String.get l.input l.read_pos;
+    l.ch <- l.input.[l.read_pos];
   l.position <- l.read_pos;
   l.read_pos <- l.read_pos + 1;;
 
