@@ -1,4 +1,4 @@
-(*let test_lexer_assign =
+let test_lexer_assign =
   let input : string = "=" in
   let lexer = Lexer.new_lexer input in
   let tok = Lexer.next_token lexer in 
@@ -111,7 +111,7 @@ let test_lexer_illegal =
     if tok.kind != Token.Illegal then
       Printf.eprintf "[failed] test_lexer_illegal -> wrong token kind\n";
     if String.compare tok.literal "$" != 0 then
-      Printf.eprintf "[failed] test_lexer_illegal -> wrong token literal\n";;*)
+      Printf.eprintf "[failed] test_lexer_illegal -> wrong token literal\n";;
 
 let test_next_token =
   let input : string = "let five = 5;" in
@@ -132,7 +132,7 @@ let test_next_token =
     List.iter f tokens;;
 
 let () =
-  (*test_lexer_assign;
+  test_lexer_assign;
   test_lexer_plus;
   test_lexer_comma;
   test_lexer_semicolon;
@@ -144,5 +144,5 @@ let () =
   test_lexer_let;
   test_lexer_int;
   test_lexer_eof;
-  test_lexer_illegal;*)
+  test_lexer_illegal;
   test_next_token
